@@ -21,6 +21,14 @@
             "failed"
           ]
         },
+        "format": {
+          "type": "string",
+          "enum": [
+            "json",
+            "csv"
+          ],
+          "default": "json"
+        },
         "downloadUrl": {
           "type": "string",
           "format": "uri"

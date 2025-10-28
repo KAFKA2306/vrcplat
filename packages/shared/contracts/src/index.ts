@@ -102,12 +102,14 @@ export const purchaseRecordSchema = z.object({
 });
 
 export const exportBundleStatusSchema = z.enum(['queued', 'processing', 'ready', 'failed']);
+export const exportBundleFormatSchema = z.enum(['json', 'csv']);
 
 export const exportBundleRequestSchema = z
   .object({
     userId: z.string().uuid(),
     requestedAt: z.string().datetime(),
     status: exportBundleStatusSchema,
+    format: exportBundleFormatSchema.default('json'),
     downloadUrl: z.string().url().optional(),
     expiresAt: z.string().datetime().optional(),
     checksum: z.string().length(64).optional()
@@ -137,6 +139,7 @@ export type ConsentState = z.infer<typeof consentStateSchema>;
 export type PresenceSession = z.infer<typeof presenceSessionSchema>;
 export type PurchaseRecord = z.infer<typeof purchaseRecordSchema>;
 export type ExportBundleRequest = z.infer<typeof exportBundleRequestSchema>;
+export type ExportBundleFormat = z.infer<typeof exportBundleFormatSchema>;
 
 export const contractSchemas = {
   userProfile: userProfileSchema,

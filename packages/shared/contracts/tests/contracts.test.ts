@@ -84,6 +84,16 @@ describe('contract schemas', () => {
     expect(result.success).toBe(false);
   });
 
+  it('defaults export format to json', () => {
+    const payload = exportBundleRequestSchema.parse({
+      userId: '5ea1f7f4-4d41-4451-9fe5-87c4bb1efc20',
+      requestedAt: '2025-10-27T18:04:12.000Z',
+      status: 'queued'
+    });
+
+    expect(payload.format).toBe('json');
+  });
+
   it('matches stored JSON schema snapshots', () => {
     const expected = {
       'user-profile': loadSnapshot('user-profile'),

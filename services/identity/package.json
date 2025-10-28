@@ -12,11 +12,12 @@
   "dependencies": {
     "@fastify/ajv-compiler": "^4.0.2",
     "@fastify/autoload": "^5.10.0",
-    "@fastify/sensible": "^5.6.0",
+    "@fastify/sensible": "^6.0.1",
     "@vrcplat/auth": "workspace:*",
     "@vrcplat/contracts": "workspace:*",
     "fastify": "^5.1.0",
-    "pino": "^9.4.0"
+    "pino": "^9.4.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "tsup": "^8.1.0",
