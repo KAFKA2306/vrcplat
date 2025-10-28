@@ -20,6 +20,9 @@
 | `NEXT_PUBLIC_DASHBOARD_SESSION_MODE` | 組み込みのデモプロファイルを使用するには `mock` に設定します | ベースURLがない場合は `mock` |
 | `NEXT_PUBLIC_KAFKA_ENV` | ヘッダーに環境ピルをレンダリングします（`production`, `staging`, `preview`） | `preview` |
 | `NEXT_PUBLIC_PRIVACY_CONSENT_URL` | `<base>/privacy/consent` と異なる場合に同意更新エンドポイントを上書きします | _任意_ |
+| `NEXT_PUBLIC_PRESENCE_SESSIONS_URL` | `<base>/presence/me` と異なる場合に在室取得エンドポイントを上書きします | _任意_ |
+| `NEXT_PUBLIC_PRIVACY_EXPORTS_URL` | `<base>/data/export` と異なる場合にエクスポート要求エンドポイントを上書きします | _任意_ |
+| `NEXT_PUBLIC_PRIVACY_DELETE_URL` | `<base>/data/delete` と異なる場合に削除要求エンドポイントを上書きします | _任意_ |
 
 `mock` モードでは、ダッシュボードはコントラクトで検証されたサンプルデータを使用してハイドレートします。実際のセッションを実行するには、IDサービスのURLを設定してください。
 
@@ -44,3 +47,5 @@
 ## 進捗
 
 - `/privacy` ページで同意スコープの切り替えが可能になりました。
+- `/presence` ページで現在と履歴の在室状況を確認できます。
+- `/privacy` ページでエクスポートと削除リクエストを送信できます。

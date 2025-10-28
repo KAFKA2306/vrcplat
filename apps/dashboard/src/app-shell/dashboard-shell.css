@@ -336,6 +336,51 @@ button.dashboard-pill:hover {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
+.maintenance-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.maintenance-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  background: var(--bg-elevated);
+}
+
+.maintenance-section h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.maintenance-choices {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.maintenance-description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.maintenance-action {
+  align-self: flex-start;
+}
+
+.maintenance-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
 .dashboard-card h2 {
   margin: 0.75rem 0 0.5rem;
   font-size: 1.2rem;
@@ -448,6 +493,53 @@ button.dashboard-pill:hover {
 
 .dashboard-switch input:disabled + span {
   opacity: 0.6;
+}
+
+.presence-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.presence-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  gap: 1.5rem;
+}
+
+.presence-item--active {
+  border-color: var(--accent-border);
+}
+
+.presence-world {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.presence-instance {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.presence-time {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.presence-empty {
+  padding: 0.75rem 1rem;
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
 }
 
 .dashboard-skeleton {
