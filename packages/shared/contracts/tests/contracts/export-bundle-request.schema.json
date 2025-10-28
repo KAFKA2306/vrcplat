@@ -1,0 +1,47 @@
+{
+  "$ref": "#/definitions/export-bundle-request",
+  "definitions": {
+    "export-bundle-request": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "requestedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "processing",
+            "ready",
+            "failed"
+          ]
+        },
+        "downloadUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "checksum": {
+          "type": "string",
+          "minLength": 64,
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "userId",
+        "requestedAt",
+        "status"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

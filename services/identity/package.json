@@ -1,0 +1,28 @@
+{
+  "name": "@vrcplat/service-identity",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src/server.ts --format esm,cjs --dts false",
+    "start": "node dist/server.js",
+    "test": "vitest --run --config ../../vitest.services.config.ts"
+  },
+  "dependencies": {
+    "@fastify/ajv-compiler": "^4.0.2",
+    "@fastify/autoload": "^5.10.0",
+    "@fastify/sensible": "^5.6.0",
+    "@vrcplat/auth": "workspace:*",
+    "@vrcplat/contracts": "workspace:*",
+    "fastify": "^5.1.0",
+    "pino": "^9.4.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.1.0",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.3"
+  }
+}

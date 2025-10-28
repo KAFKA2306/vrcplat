@@ -1,0 +1,69 @@
+{
+  "$ref": "#/definitions/consent-state",
+  "definitions": {
+    "consent-state": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "scopes": {
+          "type": "object",
+          "properties": {
+            "presence:self": {
+              "type": "boolean"
+            },
+            "presence:friends": {
+              "type": "boolean"
+            },
+            "history:self": {
+              "type": "boolean"
+            },
+            "purchases:self": {
+              "type": "boolean"
+            },
+            "avatar:meta": {
+              "type": "boolean"
+            },
+            "avatar:diff": {
+              "type": "boolean"
+            },
+            "post:write": {
+              "type": "boolean"
+            },
+            "event:write": {
+              "type": "boolean"
+            },
+            "profile:pin": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "presence:self",
+            "presence:friends",
+            "history:self",
+            "purchases:self",
+            "avatar:meta",
+            "avatar:diff",
+            "post:write",
+            "event:write",
+            "profile:pin"
+          ],
+          "additionalProperties": false
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "scopes",
+        "updatedAt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

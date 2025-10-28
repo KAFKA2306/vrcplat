@@ -1,0 +1,129 @@
+{
+  "$ref": "#/definitions/purchase-record",
+  "definitions": {
+    "purchase-record": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "userId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "provider": {
+          "type": "string",
+          "enum": [
+            "booth",
+            "shopify",
+            "gumroad",
+            "patreon",
+            "fanbox",
+            "email",
+            "manual"
+          ]
+        },
+        "itemId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "itemType": {
+          "type": "string",
+          "enum": [
+            "avatar",
+            "outfit",
+            "asset",
+            "subscription",
+            "donation",
+            "other"
+          ],
+          "default": "other"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "price": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$"
+            }
+          },
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "additionalProperties": false
+        },
+        "purchasedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "receiptRef": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "mediaUrls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "maxItems": 4
+        },
+        "linkedAvatarVersionId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "completed",
+            "refunded",
+            "pending"
+          ],
+          "default": "completed"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "provider",
+        "itemId",
+        "title",
+        "price",
+        "purchasedAt",
+        "createdAt",
+        "updatedAt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

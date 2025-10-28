@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "rootDir": ".",
+    "moduleResolution": "Bundler",
+    "baseUrl": "."
+  },
+  "include": ["next-env.d.ts", "app", "src", "tests", "*.ts", "*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}

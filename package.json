@@ -1,0 +1,12 @@
+{
+  "name": "vrcplat",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "lint": "pnpm -r run lint",
+    "test": "pnpm -r test",
+    "dev": "pnpm -r --parallel dev"
+  },
+  "workspaces": ["services/*", "apps/*", "packages/*", "packages/*/*"]
+}
