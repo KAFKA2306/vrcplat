@@ -1,119 +1,126 @@
-# Implementation plan
+# 実装計画
 
-## Purpose and scope
+## 目的と適用範囲
 
-- Capture the cross-functional plan to take the KAFKA platform from prototype to the three
-  release slices defined in `docs/requirement_draft.md`.
-- Map ownership across services, shared packages, and the dashboard UI so that sequencing,
-  dependencies, and verification are explicit.
-- Serve as the living backlog for engineering and product synch, updated as epics move.
+- `docs/requirement_draft.md` に定義された 3 スプリント構成を起点に、プロトタイプから本運用までの
+  技術・UX 作業を横断的に可視化する。
+- サービス層、共有パッケージ、ダッシュボード UI の依存関係と責任範囲を整理し、着手順序と検証観点を
+  明文化する。
+- 進捗会議と PR 説明で「どの項目が計画上どこに位置しているか」を即時追跡できる状態を維持する。
 
-## Guiding principles
+## 運用方針
 
-- Ship in vertical slices that exercise consent, data handling, and UI contracts together.
-- Keep shared contracts authoritative in `packages/shared`; app and service code import from there.
-- Document customer-facing flows alongside thin technical specs under `docs/` to avoid drift.
+- 必ず縦切りのバリュースライスで進め、同意・データ処理・UI の整合性を各スプリントで検証する。
+- ドメイン契約は `packages/shared` で一元管理し、サービス／アプリは型とスキーマを参照するだけにする。
+- 顧客向けフローと技術仕様は `docs/` に集約し、決定や変更は日付付きで本書へ追記する。
 
-## Release pacing
+## リリーススケジュール（暫定）
 
-| Sprint | Theme | Primary capabilities |
+| スプリント | テーマ | 主な成果物 |
 | --- | --- | --- |
-| S1 | Consent and presence | Identity + consent scopes, VRCX import, presence beacon, dashboard home shell |
-| S2 | Purchases and avatar meta | Purchase ingestion, duplicate resolution, avatar diff metadata, loadout editor |
-| S3 | Events and multichannel comms | Event links, multi-post composer, recommendations v1, semantic search |
+| S1 | 同意とプレゼンス | アイデンティティ基盤、同意管理、VRCX インポート、ダッシュボード基盤 |
+| S2 | 購入とアバターメタ | 購入取込・重複解消、アバター差分メタ、ロードアウト編集 |
+| S3 | イベントと多重投稿 | 集会リンク、マルチポスト、推薦 v1、意味検索 |
 
-## Epics and workstreams
+## エピック別タスク
 
-### Identity and consent (S1)
+### アイデンティティと同意（S1）
 
-- **Services/identity**
-  - OAuth broker with Discord, Google, X providers.
-  - DID issuance and user table bootstrap; session cookie with rotation.
-  - Consent scope CRUD + audit logging APIs.
-- **Packages/shared/auth**
-  - Publish TypeScript clients for session + consent endpoints.
-  - Provide Vitest contract snapshots for scopes.
-- **Apps/dashboard**
-  - Session guard (done), consent console UI, data export/delete flows.
-  - Integrate presence beacon status and consent status in header widgets.
-- **Verification**
-  - Vitest service tests for scope gating, Playwright journey for sign in → consent toggle → export.
-  - Security review for OAuth scope usage and audit trail.
+- **services/identity**
+  - Discord / Google / X OAuth2 連携、DID 発行、セッション Cookie 回転。
+  - 同意スコープ CRUD、監査ログ API、エクスポート／削除ジョブのキュー制御。
+- **packages/shared/auth**
+  - セッション・同意向け TypeScript クライアント公開、Vitest 契約テスト整備。
+- **apps/dashboard**
+  - セッションガード（実装済み）、同意コンソール、データエクスポート／削除モーダル。
+  - ヘッダーへ Beacon 状況と同意適用状況を表示。
+- **検証**
+  - サービス単体テストでスコープ制御と監査ログを確認。
+  - Playwright で「サインイン → 同意更新 → エクスポート」フローを自動化。
 
-### Presence ingestion (S1)
+### プレゼンス取込（S1）
 
-- **Services/presence**
-  - REST endpoints: `POST /presence/ping`, `GET /presence/me`, `GET /presence/friends`.
-  - VRCX importer job + dedupe rules; OSC token auth for companion clients.
-- **Packages/shared/contracts**
-  - Finalize presence session schema (done) and add friend consent types.
-  - Generate JSON schema artifacts under `tests/contracts/`.
-- **Apps/dashboard**
-  - Presence panel showing now/recent/next with consent indicators.
-  - Empty states and “connect companion” prompts.
-- **Verification**
-  - Backfill fixtures from anonymized payloads under `docs/assets/`.
-  - Playwright flow for uploading VRCX JSON and viewing history cards.
+- **services/presence**
+  - `POST /presence/ping`、`GET /presence/me`、`GET /presence/friends` を実装。
+  - VRCX インポータと OSC トークン認証、重複除外ロジック。
+- **packages/shared/contracts**
+  - プレゼンスセッションスキーマ（実装済み）とフレンド同意型を公開。
+  - `tests/contracts/` に JSON Schema スナップショットを生成。
+- **apps/dashboard**
+  - 「Now / Recent / Next」パネルを実データに接続し、同意ステータスを描画。
+  - Companion 未連携時の空状態や導線を整備。
+- **検証**
+  - 匿名化済みペイロードを `docs/assets/` に格納し再現テストを実施。
+  - Playwright で VRCX JSON アップロードと履歴表示を確認。
 
-### Purchases aggregation (S2)
+### 購入集約（S2）
 
-- **Services/purchases**
-  - Webhook receivers for BOOTH, Shopify, Gumroad, Patreon, fanbox.
-  - Email ingestion worker stub with SES/Gmail connectors (scope TBD).
-  - Duplicate reconciliation and currency normalization.
-- **Packages/shared/contracts**
-  - Enrich `PurchaseRecord` with duplicate markers and CVI/UEI hooks.
-- **Apps/dashboard**
-  - Purchases table with filters, receipt preview drawer, loadout linking control.
-  - CVI/UEI summary widget using shared analytics endpoints.
-- **Verification**
-  - Contract tests against anonymized receipts; Vitest dedupe scenarios.
-  - Playwright smoke for multi-store filtering.
+- **services/purchases**
+  - BOOTH / Shopify / Gumroad / Patreon / fanbox の Webhook 受信機を構築。
+  - メール転送インジェスタ（SES/Gmail）のスタブ、通貨正規化と重複解消ジョブ。
+- **packages/shared/contracts**
+  - `PurchaseRecord` に重複フラグや CVI / UEI 連携フィールドを追加。
+- **apps/dashboard**
+  - フィルタ付き購入リスト、領収書プレビュー、ロードアウト紐付け UI。
+  - CVI / UEI 指標ウィジェットと検証メモ表示。
+- **検証**
+  - 匿名領収書で契約テストと Vitest 重複シナリオ。
+  - Playwright でストア横断フィルタリングを確認。
 
-### Avatar diff and loadouts (S2)
+### アバター差分とロードアウト（S2）
 
-- **Services/avatar-diff**
-  - API for versions, diffs, and credit automation.
-  - Background job to validate license URLs and authorship metadata.
-- **Apps/dashboard**
-  - Avatar timeline view, diff inspector modal, loadout composer tying purchases + presence.
-  - Credit card component shareable to posts.
-- **Verification**
-  - Snapshot diff metadata tests; VRChat consent fixture tagging per requirement.
+- **services/avatar-diff**
+  - バージョン・差分・クレジット自動生成 API、ライセンス URL 監査ジョブ。
+- **apps/dashboard**
+  - アバタータイムライン、差分ビューワ、購入連携ロードアウトエディタ。
+  - クレジットカード生成とシェア導線。
+- **検証**
+  - 差分メタのスナップショットテスト、VRChat ログの同意タグ付け確認。
 
-### Events, posts, and recommendations (S3)
+### イベント・投稿・推薦（S3）
 
-- **Services/events**
-  - CRUD for event cards, invite link issuance, conversion analytics.
-- **Services/posts**
-  - Multi-post scheduler with provider fallbacks and retry log.
-- **Services/search**
-  - Hybrid semantic + keyword search indexes with consent-aware filters.
-- **Apps/dashboard**
-  - Event creation wizard, join-now CTA, multi-post composer with schedule queue.
-  - Global search bar hitting recommendation service; highlights per data type.
-- **Verification**
-  - Contract snapshots for event payloads, Playwright smoke for scheduling.
-  - Perf budget checks (LCP ≤ 2.5 s) via Lighthouse CI.
+- **services/events**
+  - 集会カード CRUD、招待リンク発行、合流率トラッキング。
+- **services/posts**
+  - マルチポストスケジューラ、リトライログ、外部 API 失敗ハンドリング。
+- **services/search**
+  - 埋め込み検索＋全文検索のハイブリッド構成。同意スコープ考慮フィルタ。
+- **apps/dashboard**
+  - イベント作成ウィザード、Join now CTA、マルチポストコンポーザ。
+  - グローバル検索バー、タイプ別ハイライト。
+- **検証**
+  - イベントペイロード契約テスト、Playwright で投稿スケジュール確認。
+  - Lighthouse CI で LCP ≤ 2.5 s を監視。
 
-## Cross-cutting tasks
+## 横断タスク
 
-- **Observability**: Ship OpenTelemetry spans from each service, hook to shared logging stack.
-- **Privacy**: Ensure data export/delete flows invalidate caches within 60 seconds.
-- **Localization**: Introduce i18n scaffolding in dashboard (`ja`, `en`) before S2 UI work.
-- **Accessibility**: Axe audits on major flows; keyboard trap checks in modals.
-- **Docs**: Update `docs/new-user-guide.md` and add visual assets to `docs/assets/` as features land.
+- **観測性**: 各サービスから OpenTelemetry を送信し、ログ基盤へ集約。
+- **プライバシー**: エクスポート／削除要求から 60 秒以内にキャッシュを無効化。
+- **ローカライズ**: ダッシュボードに ja / en の i18n 架台を導入（S2 前）。
+- **アクセシビリティ**: Axe による自動検査と、モーダルのキーボードトラップ点検。
+- **ドキュメント**: `docs/new-user-guide.md` と `docs/assets/` をリリースごとに更新。
 
-## Dependencies and sequencing
+## 依存関係と順序
 
-- Dashboard consent UI depends on identity service and consent API readiness.
-- Presence panels require beacon tokens, friend consent sync, and history importer.
-- Purchases UI waits on dedupe + currency normalization to avoid rework.
-- Avatar loadouts depend on purchase linking and presence metadata to recommend destinations.
-- Events/post surfaces rely on identity scopes (`event:write`, `post:write`) and search service embeddings.
+- ダッシュボード側の同意 UI は identity サービスと同意 API 完了後に本結線する。
+- プレゼンス表示は Beacon トークン・フレンド同意同期・履歴インポータが前提。
+- 購入 UI は重複解消と通貨正規化完了後に実装し、冪等性が担保された状態で公開。
+- ロードアウト機能は購入紐付けとプレゼンスメタを利用するため、双方のスキーマ確定を待つ。
+- イベント／投稿／推薦は `event:write`、`post:write` スコープと検索サービスの API を前提とする。
 
-## Tracking and hygiene
+## 進捗管理と更新ルール
 
-- Maintain sprint board derived from these epics; link PRs to plan sections in descriptions.
-- Run `npx markdownlint-cli2 docs/**/*.md` and `npx cspell docs` before merging updates here.
-- Review plan weekly with product/engineering leads; capture decisions inline with dated notes.
+- 本ドキュメントは週次の PM/Eng 合同レビュー直後に更新し、更新日を各節末尾に記す。
+- PR 説明には該当項目のセクションリンクを含め、完了後はチェック済みコメントを追記する。
+- スプリントボード（Issue Tracker）と本書の節を 1:1 で対応付け、ステータス変更時に双方を同期する。
+- 変更前後の合意事項は `docs/` 配下で追跡し、不要な派生メモは作成しない。
+
+## 品質維持フック
+
+- `npx markdownlint-cli2 docs/**/*.md` と `npx cspell docs` をコミット前に必ず実行する。
+- 各スプリント末に契約テスト・E2E・パフォーマンス指標を表形式で追記し、差異があれば原因と対策を
+  メモとして残す。
+- 重大なリスク（プライバシー、依存 API 改定など）は「目的と適用範囲」節直下に警告ブロックを追加し、
+  解消まで残す。
+
+*更新履歴: 2025-10-28 作成*
