@@ -1,10 +1,10 @@
-# Presence service
+# プレゼンスサービス
 
-Ingests Beacon pings and VRCX uploads to power live presence and history views.
+ビーコンのpingとVRCXのアップロードを取り込み、ライブプレゼンスと履歴ビューを強化します。
 
-## Local development
+## ローカル開発
 
 - `pnpm install`
 - `pnpm dev --filter services/presence`
 
-Detailed bootstrap instructions will follow with the first implementation.
+詳細なブートストラップ手順は、最初の実装に続きます。

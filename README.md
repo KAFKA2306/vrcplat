@@ -1,20 +1,20 @@
-# KAFKA metaverse platform
+# KAFKA メタバースプラットフォーム
 
-Monorepo scaffold for the presence, purchases, and avatar ecosystems described in `docs/`.
+`docs/` に記述されているプレゼンス、購入、アバターエコシステムのためのモノレポ足場。
 
-## Workspace layout
+## ワークスペースのレイアウト
 
-- `services/` — backend Fastify services (identity, presence, purchases) plus backlog placeholders.
-- `apps/` — operational UI (`dashboard`) built on Next.js App Router.
-- `packages/` — shared contracts and auth helpers distributed via pnpm workspace links.
-- `docs/` — strategy, requirements, and discovery notes (authoritative source).
-- `tools/` — shared scripts, docker compose, infra configs.
+- `services/` — バックエンドのFastifyサービス（ID、プレゼンス、購入）とバックログのプレースホルダー。
+- `apps/` — Next.js App Router上に構築された運用UI（`dashboard`）。
+- `packages/` — pnpmワークスペースリンクを介して配布される共有コントラクトと認証ヘルパー。
+- `docs/` — 戦略、要件、発見ノート（信頼できる情報源）。
+- `tools/` — 共有スクリプト、docker-compose、インフラ設定。
 
-## Getting started
+## はじめに
 
 ```sh
 pnpm install
 pnpm dev
 ```
 
-Linting and tests are delegated to workspace packages; see service/app READMEs for more detail.
+リンティングとテストはワークスペースパッケージに委任されています。詳細については、サービス/アプリのREADMEを参照してください。

@@ -1,3 +1,3 @@
-# Avatar diff service (backlog)
+# アバター差分サービス（バックログ）
 
-Tracks avatar versions and diff metadata. Will be activated once purchase and presence flows stabilize.
+アバターのバージョンと差分メタデータを追跡します。購入とプレゼンスのフローが安定したらアクティブになります。

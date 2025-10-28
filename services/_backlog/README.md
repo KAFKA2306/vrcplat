@@ -1,3 +1,3 @@
-# Backlog services
+# バックログサービス
 
-Parking lot for future services. Each subfolder captures design notes until the service is promoted to the main roster.
+将来のサービスのための駐車場。各サブフォルダーは、サービスがメインの名簿に昇格するまで設計メモをキャプチャします。

@@ -1,10 +1,10 @@
-# Purchases service
+# 購入サービス
 
-Normalizes inbound commerce webhooks and user-provided imports for BOOTH, Shopify, Gumroad, Patreon, and fanbox.
+BOOTH、Shopify、Gumroad、Patreon、fanboxの受信コマースWebhookとユーザー提供のインポートを正規化します。
 
-## Local development
+## ローカル開発
 
 - `pnpm install`
 - `pnpm dev --filter services/purchases`
 
-Bootstrap steps will be updated as endpoints solidify.
+ブートストラップの手順は、エンドポイントが固まり次第更新されます。

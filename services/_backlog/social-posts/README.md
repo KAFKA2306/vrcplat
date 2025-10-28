@@ -1,3 +1,3 @@
-# Social posts service (backlog)
+# ソーシャル投稿サービス（バックログ）
 
-Queues multi-network posts, event cards, and retry logs. Implementation deferred until after identity and presence milestones.
+マルチネットワーク投稿、イベントカード、再試行ログをキューに入れます。実装は、IDとプレゼンスのマイルストーンの後まで延期されます。

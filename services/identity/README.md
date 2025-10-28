@@ -1,10 +1,10 @@
-# Identity service
+# IDサービス
 
-Handles user auth linking, consent toggles, and data export/delete workflows. See root docs for full requirements.
+ユーザー認証のリンク、同意の切り替え、データのエクスポート/削除ワークフローを処理します。完全な要件については、ルートドキュメントを参照してください。
 
-## Local development
+## ローカル開発
 
 - `pnpm install`
 - `pnpm dev --filter services/identity`
 
-Environment variables documented once implementation lands.
+環境変数は、実装が完了次第、文書化されます。

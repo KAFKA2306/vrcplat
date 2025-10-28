@@ -1,7 +1,7 @@
-# Shared contracts
+# 共有コントラクト
 
-Zod schemas and JSON Schema emitters shared across services and apps to keep domains aligned.
+ドメインを連携させるために、サービスとアプリ全体で共有されるZodスキーマとJSONスキーマエミッター。
 
-## Testing
+## テスト
 
 - `pnpm test --filter packages/shared/contracts -- --runInBand`

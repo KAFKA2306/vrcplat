@@ -1,3 +1,3 @@
-# Tooling
+# ツール
 
-Place shared scripts, Docker compose files, and infra configs here to keep the repo root tidy.
+リポジトリのルートを整頓するために、共有スクリプト、Docker composeファイル、インフラ設定をここに配置します。

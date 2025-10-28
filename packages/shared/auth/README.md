@@ -1,7 +1,7 @@
-# Shared auth utilities
+# 共有認証ユーティリティ
 
-JWT verification helpers and consent guards used by services and the dashboard.
+サービスとダッシュボードで使用されるJWT検証ヘルパーと同意ガード。
 
-## Testing
+## テスト
 
 - `pnpm test --filter packages/shared/auth -- --runInBand`
