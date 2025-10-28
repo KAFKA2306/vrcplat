@@ -18,14 +18,12 @@ export function DataMaintenancePanel() {
   const exportMutation = useExportMutation();
   const deleteMutation = useDeleteMutation();
   const [selectedFormat, setSelectedFormat] = useState<'json' | 'csv'>('json');
-  const exportsList = exportsQuery.data ?? [];
-  const latestReady = useMemo(
-    () =>
-      exportsList
-        .filter(item => item.status === 'ready')
-        .sort((a, b) => Date.parse(b.requestedAt) - Date.parse(a.requestedAt))[0],
-    [exportsList]
-  );
+  const latestReady = useMemo(() => {
+    const items = exportsQuery.data ?? [];
+    return items
+      .filter(item => item.status === 'ready')
+      .sort((a, b) => Date.parse(b.requestedAt) - Date.parse(a.requestedAt))[0];
+  }, [exportsQuery.data]);
   return (
     <section className="dashboard-card dashboard-stack">
       <div className="dashboard-stack__header">
