@@ -19,6 +19,7 @@
 | `NEXT_PUBLIC_IDENTITY_LOGIN_URL` | `<base>/login` と異なる場合にログインエントリポイントを上書きします | _任意_ |
 | `NEXT_PUBLIC_DASHBOARD_SESSION_MODE` | 組み込みのデモプロファイルを使用するには `mock` に設定します | ベースURLがない場合は `mock` |
 | `NEXT_PUBLIC_KAFKA_ENV` | ヘッダーに環境ピルをレンダリングします（`production`, `staging`, `preview`） | `preview` |
+| `NEXT_PUBLIC_PRIVACY_CONSENT_URL` | `<base>/privacy/consent` と異なる場合に同意更新エンドポイントを上書きします | _任意_ |
 
 `mock` モードでは、ダッシュボードはコントラクトで検証されたサンプルデータを使用してハイドレートします。実際のセッションを実行するには、IDサービスのURLを設定してください。
 
@@ -39,3 +40,7 @@
 
 - IDサービスに到達可能になったら、モックセッションを `NEXT_PUBLIC_IDENTITY_BASE_URL` に切り替えます。
 - サービスがオンラインになったら、ダッシュボードシェルの背後にある `/presence`、`/privacy`、およびその他のルートを拡張します。
+
+## 進捗
+
+- `/privacy` ページで同意スコープの切り替えが可能になりました。
