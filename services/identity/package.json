@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsup src/server.ts --format esm,cjs --dts false",
+    "build": "tsup src/server.ts --format esm,cjs",
     "start": "node dist/server.js",
     "test": "vitest --run --config ../../vitest.services.config.ts"
   },
