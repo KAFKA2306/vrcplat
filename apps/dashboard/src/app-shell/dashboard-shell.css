@@ -133,6 +133,11 @@
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
+.beacon-pill--online {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
 .dashboard-user:hover {
   border-color: var(--accent-border);
   background: rgba(79, 182, 255, 0.18);

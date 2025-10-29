@@ -21,6 +21,7 @@
 | `NEXT_PUBLIC_KAFKA_ENV` | ヘッダーに環境ピルをレンダリングします（`production`, `staging`, `preview`） | `preview` |
 | `NEXT_PUBLIC_PRIVACY_CONSENT_URL` | `<base>/privacy/consent` と異なる場合に同意更新エンドポイントを上書きします | _任意_ |
 | `NEXT_PUBLIC_PRESENCE_SESSIONS_URL` | `<base>/presence/me` と異なる場合に在室取得エンドポイントを上書きします | _任意_ |
+| `NEXT_PUBLIC_PRESENCE_BEACON_URL` | `<base>/presence/beacon` と異なる場合にBeaconステータス取得エンドポイントを上書きします | _任意_ |
 | `NEXT_PUBLIC_PRIVACY_EXPORTS_URL` | `<base>/data/export` と異なる場合にエクスポート要求エンドポイントを上書きします | _任意_ |
 | `NEXT_PUBLIC_PRIVACY_DELETE_URL` | `<base>/data/delete` と異なる場合に削除要求エンドポイントを上書きします | _任意_ |
 
@@ -49,3 +50,4 @@
 - `/privacy` ページで同意スコープの切り替えが可能になりました。
 - `/presence` ページで現在と履歴の在室状況を確認できます。
 - `/privacy` ページでエクスポートと削除リクエストを送信できます。
+- ヘッダーにプレゼンスBeaconの稼働状況を表示しました。
