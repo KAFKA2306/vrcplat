@@ -44,6 +44,11 @@ export const consentStateSchema = z.object({
   updatedAt: z.string().datetime()
 });
 
+export const sessionSchema = z.object({
+  user: userProfileSchema,
+  consent: consentStateSchema.optional()
+});
+
 export const presenceSourceSchema = z.enum(['beacon', 'import']);
 
 export const presenceVisibilitySchema = z.enum(['private', 'friends', 'consented']);
@@ -136,6 +141,7 @@ export const exportBundleRequestSchema = z
 export type ConsentScope = z.infer<typeof consentScopeSchema>;
 export type UserProfile = z.infer<typeof userProfileSchema>;
 export type ConsentState = z.infer<typeof consentStateSchema>;
+export type Session = z.infer<typeof sessionSchema>;
 export type PresenceSession = z.infer<typeof presenceSessionSchema>;
 export type PurchaseRecord = z.infer<typeof purchaseRecordSchema>;
 export type ExportBundleRequest = z.infer<typeof exportBundleRequestSchema>;
@@ -144,6 +150,7 @@ export type ExportBundleFormat = z.infer<typeof exportBundleFormatSchema>;
 export const contractSchemas = {
   userProfile: userProfileSchema,
   consentState: consentStateSchema,
+  session: sessionSchema,
   presenceSession: presenceSessionSchema,
   purchaseRecord: purchaseRecordSchema,
   exportBundleRequest: exportBundleRequestSchema

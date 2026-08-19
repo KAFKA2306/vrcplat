@@ -1,9 +1,1 @@
-import { consentStateSchema, userProfileSchema } from '@vrcplat/contracts';
-import { z } from 'zod';
-
-export const sessionSchema = z.object({
-  user: userProfileSchema,
-  consent: consentStateSchema.optional()
-});
-
-export type Session = z.infer<typeof sessionSchema>;
+export { sessionSchema, type Session } from '@vrcplat/contracts';
