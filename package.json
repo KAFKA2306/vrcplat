@@ -4,6 +4,7 @@
   "private": true,
   "packageManager": "pnpm@9.12.0",
   "scripts": {
+    "check": "pnpm lint && pnpm --filter @vrcplat/contracts test && pnpm --filter @vrcplat/service-identity test && pnpm build",
     "lint": "pnpm -r run lint",
     "test": "pnpm -r test",
     "dev": "pnpm -r --parallel dev",
