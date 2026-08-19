@@ -23,7 +23,7 @@ export function useConsentMutation() {
       return consentStateSchema.parse(json);
     },
     onSuccess: data => {
-      queryClient.setQueryData<Session | null>(['session'], value => {
+      queryClient.setQueryData<Session | null>(['session'], (value: Session | null | undefined) => {
         if (!value) return value;
         return { ...value, consent: data };
       });
